@@ -8,6 +8,36 @@
         <!--initialize FullCalendar-->
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
         <link rel="stylesheet" href="styles.css">
+
+        <script type="module">
+            // Import the functions you need from the SDKs
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-analytics.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
+          
+            // Your Firebase configuration (replace with your actual config)
+            const firebaseConfig = {
+              apiKey: "AIzaSyB68o5AsyaiedP0tehuV4dseoLG3NOrz78",
+              authDomain: "sportferienprojekt.firebaseapp.com",
+              projectId: "sportferienprojekt",
+              storageBucket: "sportferienprojekt.firebasestorage.app",
+              messagingSenderId: "496398345149",
+              appId: "1:496398345149:web:f241550855f3a1d857e8d4",
+              measurementId: "G-BTM2JX3Q43"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            
+            // Initialize Firebase Analytics (optional, if you're using it)
+            const analytics = getAnalytics(app);
+            
+            // Initialize Firestore
+            const db = getFirestore(app);
+        
+          </script>
+          
+          
 </head>
 <body>
     
