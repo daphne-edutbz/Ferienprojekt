@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #ffffff;
+    color: #c781c7;
+    text-align: center;
+}
+
+h1{
+    color: #c781c7;
+}
+
+#calendar {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: rgb(44, 56, 63);
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #ffffff;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    height: auto; /* Full height */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: left;
+  }
+  
+  /* The Close Button */
+  .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: black;
+}
+
+    button[type="submit"] {
+    background-color: #417a3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+       background-color: #68af68; 
+    }
+
+    button[ id="deleteEventBtn"] {
+        background-color: #ca2e2e; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    button[id="deleteEventBtn"]:hover {
+        background-color: #d13333cb;}
+
+
+
+    button[id="editViewEventBtn"] {
+        background-color: #417a3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 10px;
+        }
+        
+    button[id="editViewEventBtn"]:hover {
+        background-color: #68af68;
+    }
+
+
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }    
+
+    input[type="text"], input[type="time"], input[type="number"], input[type="color"], textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        }
