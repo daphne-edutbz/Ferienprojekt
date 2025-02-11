@@ -107,8 +107,26 @@ function updateEvent(event) {
     localStorage.setItem('calendarEvents', JSON.stringify(savedEvents));
 }
 
+async function loadEvents() {
+    const querySnapshot = await getDocs(collection(db, "events"));
+    querySnapshot.forEach((doc) => {
+        const eventData = doc.data();
+        calendar.addEvent({
+            id: doc.id,
+            title: eventData.title,
+            start: eventData.start,
+            end: eventData.end,
+            color: eventData.color,
+            extendedProps: {
+                description: eventData.description
+            }
+        });
+    });
+}
         
+loadEvents().then(() => {
     calendar.render();
+});
     
 
     // Modal/Pop-up functions
@@ -154,42 +172,40 @@ function updateEvent(event) {
     });
 
     //save new appointment
-    eventForm.addEventListener('submit', function (e) {
+    eventForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-
-    const eventName = eventNameInput.value;
-    const eventTime = eventTimeInput.value;
-    const eventDuration = parseInt(eventDurationInput.value, 10) || 1;
-    const eventColor = eventColorInput.value;
-    const eventDescription = document.getElementById('eventDescription').value;
-
-    if (!eventName || !eventTime || !selectedDate || !eventDuration || !eventColor) {
-        alert('Please fill out all fields');
-        return;
-    }
-    const eventStartDate = new Date(`${selectedDate}T${eventTime}:00`);
-    const eventEndDate = new Date(eventStartDate.getTime() + (eventDuration * 60 * 60 * 1000));
-
-    if (isOverlapping({ start: eventStartDate, end: eventEndDate })) {
-        alert('The date overlaps with an existing appointment.');
-        return;
-    }
-
-    const newEvent = {
-        id: crypto.randomUUID(),
-        title: eventName,
-        start: eventStartDate.toISOString(),
-        end: eventEndDate.toISOString(),
-        color: eventColor,
-        extendedProps: {
-            description: eventDescription,
-            duration: eventDuration
+    
+        const eventName = eventNameInput.value;
+        const eventTime = eventTimeInput.value;
+        const eventDuration = parseInt(eventDurationInput.value, 10) || 1;
+        const eventColor = eventColorInput.value;
+        const eventDescription = document.getElementById('eventDescription').value;
+    
+        if (!eventName || !eventTime || !selectedDate || !eventDuration || !eventColor) {
+            alert('Please fill out all fields');
+            return;
         }
-    };
-
-    calendar.addEvent(newEvent);
-    savedEvents.push(newEvent);
-    localStorage.setItem('calendarEvents', JSON.stringify(savedEvents));
+    
+        const eventStartDate = new Date(`${selectedDate}T${eventTime}:00`);
+        const eventEndDate = new Date(eventStartDate.getTime() + (eventDuration * 60 * 60 * 1000));
+    
+        const newEvent = {
+            title: eventName,
+            start: eventStartDate.toISOString(),
+            end: eventEndDate.toISOString(),
+            color: eventColor,
+            description: eventDescription
+        };
+    
+        try {
+            await addDoc(collection(db, "events"), newEvent);
+            console.log("Event added to Firestore");
+            closeModal();
+            location.reload(); // Refresh to load the new event
+        } catch (error) {
+            console.error("Error adding event: ", error);
+        }
+    
 
     closeModal();
 });
@@ -310,49 +326,34 @@ function isOverlapping(newEvent) {
 }
 
 // Function to save an event in Firestore
-function saveEvent(event) {
-    db.collection("events").add({
-      title: event.title,
-      start: event.start.toISOString(),
-      end: event.end.toISOString(),
-      color: event.backgroundColor,
-      description: event.extendedProps.description
-    }).then(() => {
-      console.log("Event successfully saved to Firestore");
-    }).catch((error) => {
-      console.error("Error saving event: ", error);
-    });
-  }
-  
-// Function to load and display events from Firestore
-function loadEvents() {
-    db.collection("events").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const eventData = doc.data();
-        // Add event to FullCalendar
-        calendar.addEvent({
-          title: eventData.title,
-          start: eventData.start,
-          end: eventData.end,
-          color: eventData.color,
-          extendedProps: {
-            description: eventData.description
-          }
+async function saveEvent(event) {
+    try {
+        await addDoc(collection(db, "events"), {
+            title: event.title,
+            start: event.start.toISOString(),
+            end: event.end.toISOString(),
+            color: event.backgroundColor,
+            description: event.extendedProps.description
         });
-      });
-    });
-  }
+        console.log("Event successfully saved to Firestore");
+    } catch (error) {
+        console.error("Error saving event: ", error);
+    }
+}
+
+  
+
   
 // Function to delete an event
-function deleteEvent(eventId) {
-    db.collection("events").doc(eventId).delete()
-      .then(() => {
-        console.log("Event deleted");
-      }).catch((error) => {
+async function deleteEvent(eventId) {
+    try {
+        await deleteDoc(doc(db, "events", eventId));
+        console.log("Event deleted from Firestore");
+    } catch (error) {
         console.error("Error deleting event: ", error);
-      });
-  }
-  
+    }
+}
+
 
 
 });
