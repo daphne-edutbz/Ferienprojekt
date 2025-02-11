@@ -30,7 +30,7 @@ h1{
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0, 0, 0, 0.5);
   }
-  
+
   /* Modal Content/Box */
   .modal-content {
     background-color: #ffffff;
@@ -44,7 +44,7 @@ h1{
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     text-align: left;
   }
-  
+
   /* The Close Button */
   .close-button {
     color: #aaa;
@@ -52,7 +52,7 @@ h1{
     font-size: 28px;
     cursor: pointer;
   }
-  
+
   .close-button:hover {
     color: black;
 }
@@ -100,7 +100,7 @@ h1{
         font-size: 16px;
         margin-top: 10px;
         }
-        
+
     button[id="editViewEventBtn"]:hover {
         background-color: #68af68;
     }
