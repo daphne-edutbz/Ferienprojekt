@@ -308,4 +308,51 @@ function isOverlapping(newEvent) {
         return (newEvent.start < existingEventEnd && newEvent.end > existingEventStart);
     });
 }
+
+// Function to save an event in Firestore
+function saveEvent(event) {
+    db.collection("events").add({
+      title: event.title,
+      start: event.start.toISOString(),
+      end: event.end.toISOString(),
+      color: event.backgroundColor,
+      description: event.extendedProps.description
+    }).then(() => {
+      console.log("Event successfully saved to Firestore");
+    }).catch((error) => {
+      console.error("Error saving event: ", error);
+    });
+  }
+  
+// Function to load and display events from Firestore
+function loadEvents() {
+    db.collection("events").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const eventData = doc.data();
+        // Add event to FullCalendar
+        calendar.addEvent({
+          title: eventData.title,
+          start: eventData.start,
+          end: eventData.end,
+          color: eventData.color,
+          extendedProps: {
+            description: eventData.description
+          }
+        });
+      });
+    });
+  }
+  
+// Function to delete an event
+function deleteEvent(eventId) {
+    db.collection("events").doc(eventId).delete()
+      .then(() => {
+        console.log("Event deleted");
+      }).catch((error) => {
+        console.error("Error deleting event: ", error);
+      });
+  }
+  
+
+
 });
