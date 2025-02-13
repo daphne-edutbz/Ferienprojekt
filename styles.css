@@ -146,6 +146,7 @@ h1{
             }
         
             #calendar {
+                width: 100%; 
                 padding: 10px; /* Less padding on smaller screens */
             }
         
