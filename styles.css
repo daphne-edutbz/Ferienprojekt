@@ -47,6 +47,13 @@ h1{
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     text-align: left;
   }
+
+  @media (max-width: 768px) {
+    .modal-content {
+    width: 90%; /* Adjust modal width on smaller screens */
+    margin: 10% auto;
+    }
+}
   
   /* The Close Button */
   .close-button {
@@ -88,8 +95,13 @@ h1{
     }
 
     button[id="deleteEventBtn"]:hover {
-        background-color: #d13333cb;}
-
+        background-color: #d13333cb;
+    }
+    @media (max-width: 768px) {
+        button[type="submit"], button[id="editViewEventBtn"], button[id="deleteEventBtn"] {
+            padding: 15px 0; /* More padding for better touch interaction */
+        }
+    }
 
 
     button[id="editViewEventBtn"] {
@@ -114,19 +126,36 @@ h1{
         margin: 10px 0 5px;
     }    
 
-    input[type="text"], input[type="time"], input[type="number"], input[type="color"], textarea {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-        margin-bottom: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+
+        input[type="text"], input[type="time"], input[type="number"], input[type="color"], textarea {
+            width: 100%;
+            padding: 10px; 
+            box-sizing: border-box;
+            margin-bottom: 10px; /* More space between form elements */
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-
-
-        @media (max-width: 768px) {
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px; /* Adjust font size for mobile */
+            }
+        
+            h1 {
+                font-size: 20px; /* Smaller heading on mobile */
+            }
+        
+            #calendar {
+                padding: 10px; /* Less padding on smaller screens */
+            }
+        
             .modal-content {
-                width: 90%; /* Adjust modal width on smaller screens */
-                margin: 10% auto;
+                width: 90%;
+                margin: 15% auto;
+            }
+        
+            .close-button {
+                font-size: 24px; /* Larger close button on mobile */
             }
         }
+        
