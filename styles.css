@@ -1,22 +1,25 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #ffffff;
-    color: #c781c7;
+    background-color: rgb(233, 232, 232);
+    color: #000000;
     text-align: center;
 }
 
 h1{
-    color: #c781c7;
+    color: #133d7a;
 }
 
 #calendar {
-    max-width: 1000px;
-    margin: 20px auto;
-    background-color: rgb(44, 56, 63);
+    width: 60%; 
+    max-width: 100%; /* Ensure it doesn't exceed screen width */
+    margin: 0 auto;
     padding: 18px;
+    background-color: rgb(171, 203, 230);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
+
 
 /* The Modal (background) */
 .modal {
@@ -118,4 +121,12 @@ h1{
         margin-bottom: 5px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        }
+
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 90%; /* Adjust modal width on smaller screens */
+                margin: 10% auto;
+            }
         }
